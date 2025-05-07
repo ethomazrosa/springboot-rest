@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ethomaz.springboot_rest.data.dto.PersonDTO;
+import com.ethomaz.springboot_rest.data.dto.v1.PersonDTO;
+import com.ethomaz.springboot_rest.data.dto.v2.PersonDTOV2;
 import com.ethomaz.springboot_rest.exception.ResourceNotFoundException;
+import com.ethomaz.springboot_rest.mapper.custom.PersonMapper;
 import com.ethomaz.springboot_rest.model.Person;
 import com.ethomaz.springboot_rest.repository.PersonRepository;
 
@@ -23,6 +25,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper converter;
 
     public List<PersonDTO> findAll() {
         logger.info("Finding all people!");
@@ -43,6 +48,14 @@ public class PersonServices {
         var entity = parseObject(person, Person.class);
 
         return parseObject(repository.save(entity), PersonDTO.class);
+    }
+
+    public PersonDTOV2 createV2(PersonDTOV2 person) {
+        logger.info("Creating one person V2!");
+
+        var entity = converter.convertDTOToEntity(person);
+
+        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {

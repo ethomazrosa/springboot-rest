@@ -1,4 +1,4 @@
-package com.ethomaz.springboot_rest.data.dto;
+package com.ethomaz.springboot_rest.data.dto.v1;
 
 import java.io.Serializable;
 
