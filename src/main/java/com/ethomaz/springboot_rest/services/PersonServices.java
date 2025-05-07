@@ -1,8 +1,9 @@
 package com.ethomaz.springboot_rest.services;
 
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import com.ethomaz.springboot_rest.repository.PersonRepository;
 public class PersonServices {
 
     // private final AtomicLong counter = new AtomicLong();
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+    private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
     @Autowired
     PersonRepository repository;
@@ -40,12 +41,13 @@ public class PersonServices {
     public Person update(Person person) {
         logger.info("Updating one person!");
 
-        Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
+        Person entity = repository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
-        
+
         return repository.save(entity);
     }
 
@@ -56,16 +58,16 @@ public class PersonServices {
     }
 
     // private Person mockPerson(int i) {
-    //     logger.info("Finding one person!");
+    // logger.info("Finding one person!");
 
-    //     Person person = new Person();
-    //     person.setId(counter.incrementAndGet());
-    //     person.setFirstName("FirstName " + i);
-    //     person.setLastName("LastName " + i);
-    //     person.setAddress("Address " + i);
-    //     person.setGender("Male");
+    // Person person = new Person();
+    // person.setId(counter.incrementAndGet());
+    // person.setFirstName("FirstName " + i);
+    // person.setLastName("LastName " + i);
+    // person.setAddress("Address " + i);
+    // person.setGender("Male");
 
-    //     return person;
+    // return person;
     // }
 
 }
