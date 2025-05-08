@@ -4,7 +4,6 @@ import static com.ethomaz.springboot_rest.mapper.ObjectMapper.parseListObjects;
 import static com.ethomaz.springboot_rest.mapper.ObjectMapper.parseObject;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +18,10 @@ import com.ethomaz.springboot_rest.repository.PersonRepository;
 @Service
 public class PersonServices {
 
-    private final AtomicLong counter = new AtomicLong();
     private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
     @Autowired
     PersonRepository repository;
-
 
     public List<PersonDTO> findAll() {
 
@@ -34,10 +31,11 @@ public class PersonServices {
     }
 
     public PersonDTO findById(Long id) {
-        logger.info("Finding one Person!");
 
+        logger.info("Finding one Person!");
         var entity = repository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+
         return parseObject(entity, PersonDTO.class);
     }
 
@@ -54,7 +52,6 @@ public class PersonServices {
         logger.info("Updating one Person!");
         Person entity = repository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());
@@ -66,7 +63,6 @@ public class PersonServices {
     public void delete(Long id) {
 
         logger.info("Deleting one Person!");
-
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);
