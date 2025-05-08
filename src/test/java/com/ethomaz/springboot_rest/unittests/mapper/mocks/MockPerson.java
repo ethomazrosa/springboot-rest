@@ -3,7 +3,7 @@ package com.ethomaz.springboot_rest.unittests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ethomaz.springboot_rest.data.dto.v1.PersonDTO;
+import com.ethomaz.springboot_rest.data.dto.PersonDTO;
 import com.ethomaz.springboot_rest.model.Person;
 
 public class MockPerson {

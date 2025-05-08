@@ -9,7 +9,7 @@ import com.ethomaz.springboot_rest.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ethomaz.springboot_rest.data.dto.v1.PersonDTO;
+import com.ethomaz.springboot_rest.data.dto.PersonDTO;
 import com.ethomaz.springboot_rest.model.Person;
 
 public class ObjectMapperTests {

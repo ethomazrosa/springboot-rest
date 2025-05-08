@@ -3,23 +3,21 @@ package com.ethomaz.springboot_rest.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ethomaz.springboot_rest.services.PersonServices;
-
 @RestController
+@RequestMapping("/api/test/v1")
 public class TestLogController {
 
-    private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
+    private Logger logger = LoggerFactory.getLogger(TestLogController.class.getName());
 
-    @GetMapping("/test-log")
+    @GetMapping
     public String testLog() {
-        logger.debug("Debug log message");
-        logger.info("Info log message");
-        logger.warn("Warn log message");
-        logger.error("Error log message");
-
+        logger.debug("This is an DEBUG log");
+        logger.info("This is an INFO log");
+        logger.warn("This is an WARN log");
+        logger.error("This is an ERROR log");
         return "Logs generated successfully!";
     }
-
 }
