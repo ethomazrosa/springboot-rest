@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.ethomaz.springboot_rest.controllers.PersonController;
 import com.ethomaz.springboot_rest.data.dto.PersonDTO;
+import com.ethomaz.springboot_rest.exception.RequiredObjectIsNullException;
 import com.ethomaz.springboot_rest.exception.ResourceNotFoundException;
 import com.ethomaz.springboot_rest.model.Person;
 import com.ethomaz.springboot_rest.repository.PersonRepository;
@@ -48,6 +49,8 @@ public class PersonServices {
 
     public PersonDTO create(PersonDTO person) {
 
+        if (person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Creating one Person!");
         var entity = parseObject(person, Person.class);
         var dto = parseObject(repository.save(entity), PersonDTO.class);
@@ -57,6 +60,8 @@ public class PersonServices {
     }
 
     public PersonDTO update(PersonDTO person) {
+
+        if (person == null) throw new RequiredObjectIsNullException();
 
         logger.info("Updating one Person!");
         Person entity = repository.findById(person.getId())
